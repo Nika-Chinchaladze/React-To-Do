@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-
-const api = axios.create({
-  baseURL: 'http://localhost:5000',
-});
+import { getBooks, getBookById, postBook, putBook, deleteBook } from "./apiRequest";
 
 const App = () => {
   const [books, setBooks] = useState([]);
@@ -22,28 +17,18 @@ const App = () => {
   // [done]
   const fetchBooks = async () => {
     try {
-      const response = await api.get('/books');
-      setBooks(response.data.data);
+      const response = await getBooks();
+      setBooks(response);
     } catch (error) {
       console.error('Error fetching books:', error);
     }
   };
 
   // [done]
-  const fetchBookById = async (id) => {
-    try {
-      const response = await api.get(`/books/${id}`);
-      return response.data.data;
-    } catch (error) {
-      console.error('Error fetching book by id:', error);
-    }
-  }
-
-  // [done]
   const addBook = async () => {
     try {
-      const response = await api.post('/books', newBook);
-      setBooks([...books, response.data.book]);
+      const response = await postBook(newBook);
+      setBooks([...books, response]);
       setNewBook({ title: '', author: '', image: '', price: '' });
     } catch (error) {
       console.error('Error adding book:', error);
@@ -53,8 +38,8 @@ const App = () => {
   // [done]
   const updateBook = async (id) => {
     try {
-      await api.put(`/books/${id}`, editingBook);
-      const retrieveBook = await fetchBookById(id);
+      await putBook(id, editingBook);
+      const retrieveBook = await getBookById(id);
       setBooks(books.map(book => (book.id === id ? retrieveBook : book)));
       setEditingBook(null);
       reloadPage();
@@ -64,9 +49,9 @@ const App = () => {
   };
 
   // [done]
-  const deleteBook = async (id) => {
+  const removeBook = async (id) => {
     try {
-      await api.delete(`/books/${id}`);
+      await deleteBook(id);
       setBooks(books.filter(book => book.id !== id));
       reloadPage();
     } catch (error) {
@@ -147,7 +132,7 @@ const App = () => {
             </div>
             <div className='button-space'>
               <button className='edit-btn' onClick={() => handleEdit(book)}>Edit</button>
-              <button className='delete-btn' onClick={() => deleteBook(book._id)}>Delete</button>
+              <button className='delete-btn' onClick={() => removeBook(book._id)}>Delete</button>
             </div>
           </li>
         ))}
