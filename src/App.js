@@ -5,6 +5,7 @@ const App = () => {
   const [books, setBooks] = useState([]);
   const [newBook, setNewBook] = useState({ title: '', author: '', image: '', price: '' });
   const [editingBook, setEditingBook] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const reloadPage = () => {
     window.location.reload();
@@ -14,13 +15,15 @@ const App = () => {
     fetchBooks();
   }, []);
 
-  // [done]
+  // [done ... tested]
   const fetchBooks = async () => {
     try {
       const response = await getBooks();
       setBooks(response);
+      setLoading(false);
     } catch (error) {
       console.error('Error fetching books:', error);
+      setLoading(false);
     }
   };
 
@@ -81,10 +84,14 @@ const App = () => {
     }
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
-      <h1 id="app-title">Basic CRUD App With React</h1>
-      <form id="form-element" onSubmit={handleSubmit}>
+      <h1 data-cy="main-title" id="app-title">Basic CRUD App With React</h1>
+      <form data-cy="form" id="form-element" onSubmit={handleSubmit}>
         <input
           type="text"
           name="title"
@@ -117,12 +124,13 @@ const App = () => {
         />
         <button type="submit">{editingBook ? 'Update Book' : 'Add New Book'}</button>
       </form>
-      
+
       <hr></hr>
-      <h2 id="content-title">Available Books</h2>
-      
-      <ul id="main-content">
-        {books.map(book => (
+      <h2 data-cy="content-title" id="content-title">Available Books</h2>
+
+      <ul id="main-content" data-cy="book-content">
+        {books && books.length > 0 ? (
+        books.map(book => (
           <li key={book._id} className='list-item'>
             <img src={`${book.image}`} alt="img"></img>
             <div className="text-div">
@@ -135,7 +143,9 @@ const App = () => {
               <button className='delete-btn' onClick={() => removeBook(book._id)}>Delete</button>
             </div>
           </li>
-        ))}
+        ))) : (
+          <p data-cy="no-books">No books available</p>
+        )}
       </ul>
 
     </div>

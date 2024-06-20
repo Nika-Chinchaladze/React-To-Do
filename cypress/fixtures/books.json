@@ -1,0 +1,7 @@
+{
+    "data": [
+      { "_id": "1", "title": "Heavy Box Hands", "author": "Dustin", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTugBHuGWykfPy5bxKD9xa-CBQu4Z95SVvSdA&usqp=CAU", "price": 11 },
+      { "_id": "2", "title": "Hits like a track", "author": "Jastin", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTugBHuGWykfPy5bxKD9xa-CBQu4Z95SVvSdA&usqp=CAU", "price": 12 },
+      { "_id": "3", "title": "Keeps trying", "author": "Max", "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTugBHuGWykfPy5bxKD9xa-CBQu4Z95SVvSdA&usqp=CAU", "price": 13 }
+    ]
+}
