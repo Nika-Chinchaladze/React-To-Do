@@ -27,7 +27,7 @@ const App = () => {
     }
   };
 
-  // [done]
+  // [done ... tested]
   const addBook = async () => {
     try {
       const response = await postBook(newBook);
@@ -93,6 +93,7 @@ const App = () => {
       <h1 data-cy="main-title" id="app-title">Basic CRUD App With React</h1>
       <form data-cy="form" id="form-element" onSubmit={handleSubmit}>
         <input
+          data-cy="title-input"
           type="text"
           name="title"
           placeholder="Title"
@@ -100,29 +101,30 @@ const App = () => {
           onChange={handleChange}
         />
         <input
-          type
-          ="text"
+          data-cy="author-input"
+          type="text"
           name="author"
           placeholder="Author"
           value={editingBook ? editingBook.author : newBook.author}
           onChange={handleChange}
         />
         <input
-          type
-          ="text"
+          data-cy="image-input"
+          type="text"
           name="image"
           placeholder="Image"
           value={editingBook ? editingBook.image : newBook.image}
           onChange={handleChange}
         />
         <input
+          data-cy="price-input"
           type="number"
           name="price"
           placeholder="Price"
           value={editingBook ? editingBook.price : newBook.price}
           onChange={handleChange}
         />
-        <button type="submit">{editingBook ? 'Update Book' : 'Add New Book'}</button>
+        <button data-cy="submit-btn" type="submit">{editingBook ? 'Update Book' : 'Add New Book'}</button>
       </form>
 
       <hr></hr>
@@ -132,7 +134,7 @@ const App = () => {
         {books && books.length > 0 ? (
         books.map(book => (
           <li key={book._id} className='list-item'>
-            <img src={`${book.image}`} alt="img"></img>
+            <img src={`${book.image ? book.image : 'default-image.jpg'}`} alt="img"></img>
             <div className="text-div">
               <p><b>Title:</b> {book.title}</p>
               <p><b>Author:</b> {book.author}</p>
