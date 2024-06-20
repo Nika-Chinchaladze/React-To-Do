@@ -7,10 +7,6 @@ const App = () => {
   const [editingBook, setEditingBook] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const reloadPage = () => {
-    window.location.reload();
-  };
-
   useEffect(() => {
     fetchBooks();
   }, []);
@@ -62,7 +58,12 @@ const App = () => {
   const removeBook = async (id) => {
     try {
       await deleteBook(id);
-      setBooks(books.filter(book => book.id !== id));
+
+      // remove book
+      const renewedBooks = books.filter((book) => book._id !== id);
+
+      // set renewed books
+      setBooks(renewedBooks);
     } catch (error) {
       console.error('Error deleting book:', error);
     }
