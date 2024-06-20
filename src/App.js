@@ -43,9 +43,16 @@ const App = () => {
     try {
       await putBook(id, editingBook);
       const retrieveBook = await getBookById(id);
-      setBooks(books.map(book => (book.id === id ? retrieveBook : book)));
+      
+      // update books array
+      let index = books.findIndex((book) => book._id === id);
+      if (index >= 0) {
+        books[index] = retrieveBook;
+      }
+
+      // set renewed Book
+      setBooks(books);
       setEditingBook(null);
-      reloadPage();
     } catch (error) {
       console.error('Error updating book:', error);
     }
@@ -56,7 +63,6 @@ const App = () => {
     try {
       await deleteBook(id);
       setBooks(books.filter(book => book.id !== id));
-      reloadPage();
     } catch (error) {
       console.error('Error deleting book:', error);
     }
