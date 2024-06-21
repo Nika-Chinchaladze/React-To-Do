@@ -34,7 +34,7 @@ const App = () => {
     }
   };
 
-  // [done]
+  // [done ... tested]
   const updateBook = async (id) => {
     try {
       await putBook(id, editingBook);
@@ -54,7 +54,7 @@ const App = () => {
     }
   };
 
-  // [done]
+  // [done ... tested]
   const removeBook = async (id) => {
     try {
       await deleteBook(id);
