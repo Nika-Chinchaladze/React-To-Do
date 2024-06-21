@@ -147,9 +147,9 @@ const App = () => {
           <li key={book._id} className='list-item'>
             <img src={`${book.image ? book.image : 'default-image.jpg'}`} alt="img"></img>
             <div className="text-div">
-              <p><b>Title:</b> {book.title}</p>
-              <p><b>Author:</b> {book.author}</p>
-              <p><b>Price:</b> ${book.price}</p>
+              <p><b>Title:</b> <span className="p-title">{book.title}</span></p>
+              <p><b>Author:</b> <span className="p-author">{book.author}</span></p>
+              <p><b>Price:</b> $<span className="p-price">{book.price}</span></p>
             </div>
             <div className='button-space'>
               <button className='edit-btn' onClick={() => handleEdit(book)}>Edit</button>
