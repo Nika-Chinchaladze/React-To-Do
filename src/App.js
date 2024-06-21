@@ -106,6 +106,7 @@ const App = () => {
           placeholder="Title"
           value={editingBook ? editingBook.title : newBook.title}
           onChange={handleChange}
+          required
         />
         <input
           data-cy="author-input"
@@ -114,6 +115,7 @@ const App = () => {
           placeholder="Author"
           value={editingBook ? editingBook.author : newBook.author}
           onChange={handleChange}
+          required
         />
         <input
           data-cy="image-input"
@@ -122,6 +124,7 @@ const App = () => {
           placeholder="Image"
           value={editingBook ? editingBook.image : newBook.image}
           onChange={handleChange}
+          required
         />
         <input
           data-cy="price-input"
@@ -130,6 +133,7 @@ const App = () => {
           placeholder="Price"
           value={editingBook ? editingBook.price : newBook.price}
           onChange={handleChange}
+          required
         />
         <button data-cy="submit-btn" type="submit">{editingBook ? 'Update Book' : 'Add New Book'}</button>
       </form>
